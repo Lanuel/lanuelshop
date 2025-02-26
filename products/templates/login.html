@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 style="text-align: center; margin-bottom: 15px;">Login</h2>
+    <div style="background-color: #f2f5c9; padding: 20px; border-radius: 10px;">
+        <!-- Display messages -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Dynamic message for checkout redirection -->
+        {% if request.GET.next %}
+            <div style="background-color: #ffcccc; padding: 10px; border-radius: 10px; text-align: center; margin-bottom: 15px;">
+                <strong style="color: #0000ff;">Please log in to proceed to checkout.</strong>
+            </div>
+        {% endif %}
+
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
+
+        <!-- Login Form -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

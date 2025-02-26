@@ -44,47 +44,56 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'view_cart' %}">View Cart</a></li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/about">About</a>
-                <a class="dropdown-item" href="/contact">Contact Info</a>
-                <a class="dropdown-item" href="#">AI Agent</a>
-            </div>
-        </li>
-    </ul>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"><a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item"><a class="nav-link"
+                                    href="{% url 'view_cart' %}">View Cart</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#"
+                   id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/about">About</a>
+                    <a class="dropdown-item" href="/contact">Contact Info</a>
+                    <a class="dropdown-item" href="#">AI Agent</a>
+                </div>
+            </li>
+        </ul>
 
-    <!-- Added margin-right to search form -->
-    <form class="form-inline my-2 my-lg-0 mr-3">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+        <!-- Added margin-right to search form -->
+        <form class="form-inline my-2 my-lg-0 mr-3" action="{% url 'search' %}" method="GET">
+    <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
 
-    {% if user.is_authenticated %}
-        <form action="{% url 'logout' %}" method="post" class="d-inline-block ml-2">
+        {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post"
+              class="d-inline-block ml-2">
             {% csrf_token %}
-            <button type="submit" class="btn btn-link">Logout ({{ user.username }})</button>
+            <button type="submit" class="btn btn-link">
+                Logout({{user.username.title}})
+            </button>
         </form>
-    {% else %}
+        {% else %}
         <!-- Added margin between login and signup -->
         <a href="{% url 'login' %}" class="btn btn-link ml-1">Login</a>
         <span class="mx-0">||</span>
         <a href="{% url 'signup' %}" class="btn btn-link ml-1">Signup</a>
-    {% endif %}
-</div>
+        {% endif %}
+    </div>
 
 
 </nav>
+
 <h6 class="moving-text">🚧 This website is under construction. 🚧</h6>
 
 <hr>
 
 {% if messages %}
-    <div id="message-container" style="
+<div id="message-container" style="
         position: fixed;
         top: 20%;
         left: 50%;
@@ -98,22 +107,22 @@
         z-index: 1000;
         display: none;  /* Hidden by default */
     ">
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    </div>
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+</div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var messageBox = document.getElementById("message-container");
-            if (messageBox) {
-                messageBox.style.display = "block";  // Show message
-                setTimeout(function() {
-                    messageBox.style.display = "none";  // Hide after 5 seconds
-                }, 5000);
-            }
-        });
-    </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var messageBox = document.getElementById("message-container");
+        if (messageBox) {
+            messageBox.style.display = "block";  // Show message
+            setTimeout(function() {
+                messageBox.style.display = "none";  // Hide after 5 seconds
+            }, 5000);
+        }
+    });
+</script>
 {% endif %}
 
 
@@ -147,7 +156,8 @@
         </p>
         <p class="text-muted">
             <small>
-                <a href="mailto:support@lanuels-shop.com" target="_blank">Report a bug.</a>
+                <a href="mailto:support@lanuels-shop.com" target="_blank">Report
+                    a bug.</a>
                 <br>
                 <a href="/privacy-policy">Read our privacy policy.</a>
             </small>

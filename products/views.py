@@ -130,8 +130,7 @@ def checkout(request):
     request.session["cart"] = {}
 
     return redirect("index")  # Redirect to products page after checkout
-# How would the message in the first condition be displayed when the user is
-# immediately redirected to the login page?
+
 
 def signup(request):
     if request.method == "POST":
@@ -145,3 +144,13 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, "signup.html", {"form": form})
+
+
+def search_products(request):
+    query = request.GET.get("q", "").strip()  # Get the search query
+    results = []
+
+    if query:  # If there is a search query, filter products
+        results = Product.objects.filter(name__icontains=query)
+
+    return render(request, "search_result.html", {"query": query, "results": results})

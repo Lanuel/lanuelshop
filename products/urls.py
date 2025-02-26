@@ -1,8 +1,11 @@
 from . import views
 from django.urls import path
-from .views import add_to_cart, remove_from_cart, checkout
+from .views import add_to_cart, remove_from_cart, checkout, search_products
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path("", views.index, name="index"),
@@ -21,7 +24,7 @@ urlpatterns = [
          name="remove_from_cart"),
     path("cart/increase/<int:product_id>/", views.increase_quantity,
          name="increase_quantity"),
-
+    path("search/", search_products, name="search"),
 
     # Authentication
     path("login/", auth_views.LoginView.as_view(template_name="login.html"),
@@ -29,3 +32,5 @@ urlpatterns = [
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("signup/", views.signup, name="signup"),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

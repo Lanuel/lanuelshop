@@ -1,6 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
 <div class="container">
     <h2 style="text-align: center; margin-bottom: 20px;">Your Shopping
         Cart</h2>
@@ -63,4 +106,5 @@
         {% endif %}
     </div>
 </div>
+
 {% endblock %}
